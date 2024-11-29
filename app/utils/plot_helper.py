@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-def plot_data(data, x_column, y_column, plot_type="line", title=None, xlabel=None, ylabel=None):
+def plot_data(data, x_column, y_column, plot_type="line", title=None, xlabel=None, ylabel=None, figsize=(15, 4)):
     """
     Generates a plot of the data with customizable options.
     Args:
@@ -20,10 +20,10 @@ def plot_data(data, x_column, y_column, plot_type="line", title=None, xlabel=Non
             raise ValueError(f"Columns '{x_column}' or '{y_column}' not found in the data.")
         
         # Create the plot
-        fig, ax = plt.subplots(figsize=(10, 6))
+        fig, ax = plt.subplots(figsize=figsize)
         
         if plot_type == "line":
-            ax.plot(data[x_column], data[y_column], marker='o', linestyle='-')
+            ax.plot(data[x_column], data[y_column], marker='o', linestyle='-', markersize=4)
         elif plot_type == "scatter":
             ax.scatter(data[x_column], data[y_column])
         elif plot_type == "bar":
@@ -35,7 +35,12 @@ def plot_data(data, x_column, y_column, plot_type="line", title=None, xlabel=Non
         ax.set_xlabel(xlabel if xlabel else x_column)
         ax.set_ylabel(ylabel if ylabel else y_column)
         ax.set_title(title if title else f"{y_column} vs {x_column}")
-        ax.grid(True)
+        ax.grid(True, color='gray', linestyle='--', linewidth=0.5, alpha=0.5)
+
+        # Set transparent background
+        fig.patch.set_alpha(0.0)  # Make the figure's background transparent
+        ax.set_facecolor((0, 0, 0, 0))  # Make the axes' background transparent (RGBA)
+
 
         # Show the plot
         plt.show()

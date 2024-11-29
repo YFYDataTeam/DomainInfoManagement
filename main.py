@@ -1,5 +1,9 @@
 import streamlit.web.cli as stcli
 import sys
+import warnings
+
+# Suppress all warnings
+warnings.filterwarnings("ignore")
 
 def main():
     """
